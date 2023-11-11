@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+  <h2>دریافت دسترسی&zwnj;ها ناموفق بود.</h2>
+  <p>برای درج نشان و افزونه روی آگهی&zwnj; شما نیاز است تا با دادن دسترسی&zwnj;های گفته&zwnj;شده موافقت
+    کنید.</p>
+  <div
+    style="position: sticky;bottom: 0;margin-top: auto;background: #fff;padding: 16px 0;display: flex;gap: 8px;flex-wrap: wrap;">
+    <a class="button secondary" href="divar://profile">بازگشت به دیوار</a>
+    <a class="button primary" href="{{ oauth_url }}">شروع دوبارهٔ فرایند</a>
+  </div>
+
+
+{% endblock %}

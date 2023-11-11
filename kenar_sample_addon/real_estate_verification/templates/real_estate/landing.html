@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h1>تایید مالکیت</h1>
+<details open>
+    <summary>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            class="caret">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.41 16.59L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.59Z" fill="black"
+                fill-opacity="0.32"></path>
+        </svg>
+        <span>سوپیشنیه چیست؟</span>
+    </summary>
+    <p>
+        با وارد کردن کدپستی ملک آگهی، مالکیت ملک شما در <a href="https://amlak.mrud.ir/" target="_blank"
+            rel="nofollow noopener">سامانهٔ ملی املاک و
+            اسکان کشور</a> بررسی می&zwnj;شود و در صورت
+        تأیید، نشان «با تأیید مالکیت» در آگهی شما نمایش داده می&zwnj;شود.
+    </p>
+    <p>
+        توجه: ملک مورد نظر باید قبلاً در <a href="https://amlak.mrud.ir/" target="_blank"
+            rel="nofollow noopener" title="سامانهٔ املاک و اسکان کشور">این سامانه</a> ثبت شده باشد.
+    </p>
+</details>
+<div style=" position: sticky; bottom: 0; margin-top: auto; background: #fff; padding: 16px 0; ">
+    <p>
+        در ادامه نیاز است تا اجازهٔ درج افزونه در صفحهٔ اگهی و دسترسی به شمارهٔ خود را بدهید
+    </p>
+    <a class="button primary" href="/real-estate/start?token={{ token }}">شروع فرایند</a>
+</div>
+{% endblock %}

@@ -9,24 +9,40 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
+from .util import to_bool
+
+from cryptography.fernet import Fernet
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lic@y)r)trp-1xoyzf9xv-&t-(nw_b4mz*%yxitgiywxe&jo_1'
+SECRET_KEY = os.environ.get("SECRET", default="6c!n8n4pxpd+p76x#b9dp-++4p!96naljx4&im$)cpn-no3d&2")
+
+# Always set this in env in production
+ENCRYPTION_KEY = os.environ.get("ENCRYPTION_SECRET", Fernet.generate_key().decode()).encode()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = to_bool(os.environ.get("DEBUG", default=True))
+DEBUG_TOKEN = ""
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: admin can cause security hole in big companies:D
+ADMIN_ENABLED = to_bool(os.environ.get("ADMIN_ENABLED", default=False))
 
+HOST = os.environ.get("HOST", default="localhost:8000")
+
+if DEBUG:
+    # noinspection HttpUrlsUsage
+    HOST_PREFIX = 'http://'
+else:
+    HOST_PREFIX = 'https://'
+
+CSRF_TRUSTED_ORIGINS = [HOST_PREFIX + HOST, ]
 
 # Application definition
 
@@ -37,10 +53,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'kenar_sample_addon.real_estate_verification',
+    'kenar_sample_addon.oauth',
+    'kenar_sample_addon.background_check'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # TODO: remove when cdn is fixed
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,7 +75,7 @@ ROOT_URLCONF = 'kenar_sample_addon.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['kenar_sample_addon', BASE_DIR / 'kenar_sample_addon' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,22 +88,11 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = [
+    BASE_DIR / "kenar_sample_addon" / "static",
+]
+
 WSGI_APPLICATION = 'kenar_sample_addon.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -99,6 +109,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -111,13 +126,30 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+
+STATIC_ROOT = BASE_DIR / "static"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+OAUTH_INFO_SESSION_KEY = 'oauth_state'
+
+# ESKAN settings
+ESKAN_API_KEY = os.environ.get("ESKAN_API_KEY", "YOUR API KEY")
+AMLAK_ESKAN_URL = os.environ.get('AMLAK_ESKAN_URL', 'https://amlakservice.mrud.ir/')
+
+
+DIVAR_RPC_ENABLED = to_bool(os.environ.get("DIVAR_RPC_ENABLED", True))
+
+if DIVAR_RPC_ENABLED:
+    from divar_rpc import init
+    from rpc_lib.context import ThreadContextHolder
+
+    init("verification-addon", ThreadContextHolder())
+

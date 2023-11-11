@@ -1,0 +1,20 @@
+{% load static %}
+
+{% block content %}
+
+<div class="card">
+    {% if check.status == "IN_REVIEW" %}
+        <h2 class="text-success">در حال بررسی عدم سوء پیشینه</h2>
+    {% elif check.status == "ACCEPTED" %}
+        <h2 class="text-success">عدم سوء پیشینه در تاریخ {{ check.persian_check_date_str }} تایید شده</h2>
+    {% elif check.status == "REJECTED" %}
+        <h2 class="text-success">عدم سوء پیشینه رد شده</h2>
+    {% endif %}
+</div>
+<div
+    style="position: sticky;bottom: 0;margin-top: auto;background: #fff;padding: 16px 0;display: flex;gap: 8px;flex-wrap: wrap; ">
+    <a class="button primary" href="divar://profile">بازگشت به دیوار</a>
+</div>
+
+
+{% endblock %}

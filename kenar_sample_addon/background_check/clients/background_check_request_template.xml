@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<soap-env:Envelope xmlns:soap-env="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap-env:Header xmlns:wsa="http://www.w3.org/2005/08/addressing">
+        <wsa:Action>http://WebService.tsinco.com/ESTL/SendInquiryRequestPersonRequest</wsa:Action>
+        <wsa:MessageID>urn:uuid:7a124387-2746-4fb3-91f1-58081b1e0caf</wsa:MessageID>
+        <wsa:To>{{estl_wsdl_url}}</wsa:To>
+    </soap-env:Header>
+    <soap-env:Body>
+        <ns0:SendInquiryRequestPerson xmlns:ns0="http://WebService.tsinco.com/">
+            <TerminalID>{{terminal_id}}</TerminalID>
+            <Password>{{password}}</Password>
+            <NationalID>{{national_id}}</NationalID>
+            <FirstName>{{first_name}}</FirstName>
+            <LastName>{{last_name}}</LastName>
+            <FatherName>{{father_name}}</FatherName>
+            <BrithDate>{{birth_date}}</BrithDate>
+            <FirstNameLatin>-</FirstNameLatin>
+            <LastNameLatin>-</LastNameLatin>
+            <IdentityID>{{identity_id}}</IdentityID>
+            <Province>-</Province>
+            <City>-</City>
+            <RegisteredDate>{{registered_date}}</RegisteredDate>
+            <Addr>-</Addr>
+            <Tell>-</Tell>
+            <PostalCode>-</PostalCode>
+            <Gender>1</Gender>
+            <Status>1</Status>
+            <Country>38</Country>
+            <Mobile>{{mobile}}</Mobile>
+            <Image>-</Image>
+        </ns0:SendInquiryRequestPerson>
+    </soap-env:Body>
+</soap-env:Envelope>

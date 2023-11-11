@@ -14,12 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+
+from .views import landing, start_verification, oauth_callback, form, verify
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("real-estate/", include("kenar_sample_addon.real_estate_verification.urls", namespace="real-estate")),
-    path("background-check/", include("kenar_sample_addon.background_check.urls", namespace="background-check")),
-    path("oauth/", include("kenar_sample_addon.oauth.urls", namespace="oauth")),
+    path("landing/", landing, name="landing"),
+    path("start/", start_verification, name="start"),
+    path("oauth-callback/", oauth_callback, name="oauth-callback"),
+    path("form/", form, name="form"),
+    path("verify/", verify, name="verify"),
 ]
+
+app_name = 'kenar_sample_addon.background_check'

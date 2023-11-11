@@ -1,0 +1,288 @@
+:root {
+    --color-brand: #a62626;
+    --color-brand-secondary: rgb(166, 38, 38, 0.56);
+    --color-brand-light-100: rgb(166, 38, 38, 0.04);
+    --color-brand-divider: rgb(166, 38, 38, 0.12);
+    --color-brand-hover: #be3737;
+    --color-brand-press: #9d1b1b;
+    --color-black-primary: rgba(0, 0, 0, 0.87);
+    --color-black-secondary: rgba(0, 0, 0, 0.56);
+    --color-black-dark-100: rgba(0, 0, 0, 0.48);
+    --color-black-medium: rgba(0, 0, 0, 0.24);
+    --color-black-divider: rgba(0, 0, 0, 0.12);
+    --color-text: var(--color-black-primary);
+    --color-error: #ff0000;
+    --color-error-hint: rgb(255, 0, 0, 0.08);
+    --color-success-primary: #2e7d32;
+}
+
+* {
+    font-family: "Vazirmatn", sans-serif !important;
+    box-sizing: border-box;
+}
+
+:root {
+    font-family: "Vazirmatn", sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    direction: rtl;
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+html {
+    height: 100dvh;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.35rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 560px;
+    padding: 0 16px;
+}
+
+div#app {
+    display: flex;
+    flex-flow: column wrap;
+    min-height: 100dvh;
+}
+
+header {
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.12);
+    display: flex;
+    height: 64px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    -webkit-transition: top 0.24s ease-in-out;
+    transition: top 0.24s ease-in-out;
+    width: 100%;
+    z-index: 1040;
+    justify-content: center;
+}
+
+details {
+    background: #f0faff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+details p:last-of-type {
+    margin-bottom: 0;
+}
+
+details summary {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 8px;
+}
+
+details[open] summary .caret {
+    transform: rotate(-90deg);
+}
+
+details summary .caret {
+    transition: all 0.24s;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-brand);
+    transition: all 0.2s;
+}
+
+a:hover {
+    color: var(--color-text);
+}
+
+.button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 1rem;
+    flex: 1;
+    border: 1px solid transparent;
+    cursor: pointer;
+    min-width: 96px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.button.primary {
+    background: var(--color-brand);
+    color: #fff;
+}
+
+.button.secondary {
+    background-color: #fff;
+    color: var(--color-brand);
+    border-color: var(--color-brand);
+}
+
+.button.primary:hover {
+    background-color: var(--color-brand-hover);
+}
+
+.button.primary:hover:active {
+    background-color: var(--color-brand-press);
+}
+
+.button.secondary:hover {
+    background-color: var(--color-brand-light-100);
+}
+
+.button.secondary:hover:active {
+    background-color: var(--color-brand-divider);
+}
+
+
+*:disabled {
+    opacity: 0.7;
+    pointer-events: none;
+    user-select: none;
+}
+
+.form-field {
+    display: flex;
+    flex-flow: column wrap;
+    margin: 16px 0;
+}
+
+.form-field .label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.form-field .label strong {
+    font-size: 0.85rem;
+    opacity: 0.56;
+}
+
+.form-field input, .form-field select {
+    border-radius: 4px;
+    padding: 1px 16px;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    background-color: #fff;
+    color: var(--color-black-primary);
+    border: 1px solid var(--color-black-medium);
+    transition: all 0.15s;
+}
+
+
+.form-field input:hover {
+    border-color: var(--color-black-dark-100);
+}
+
+.form-field input:active,
+.form-field input:focus,
+.form-field select:active,
+.form-field select:focus {
+    border-color: var(--color-brand-secondary);
+    outline: none;
+}
+
+.form-field.error input, .form-field.error select {
+    border-color: var(--color-error);
+}
+
+.errorlist, .form-error {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.errorlist li, .form-error li {
+    padding: 2px 8px 0 0;
+    color: var(--color-error);
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 400;
+}
+
+.errorlist li:before, .form-error li:before {
+    content: "!";
+    width: 16px;
+    height: 16px;
+    color: transparent;
+    user-select: none;
+    background-image: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22red%22%20fill-rule%3D%22evenodd%22%20d%3D%22M12%2020a8%208%200%201%201%200-16%208%208%200%200%201%200%2016Zm1.696-17.859C6.863%201.011%201.011%206.863%202.141%2013.696c.684%204.14%204.023%207.479%208.163%208.163%206.833%201.13%2012.685-4.722%2011.555-11.556-.684-4.139-4.023-7.478-8.163-8.162ZM12%206.634c-.69%200-1.25.56-1.25%201.25l.5%204.116a.75.75%200%200%200%201.5%200l.5-4.116c0-.69-.56-1.25-1.25-1.25ZM10.75%2016a1.25%201.25%200%201%201%202.5%200%201.25%201.25%200%200%201-2.5%200Z%22%20clip-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E);
+}
+
+.form-error {
+    background-color: var(--color-error-hint);
+    padding: 8px;
+    border-radius: 4px;
+    margin: 16px 0;
+
+}
+
+.form-error li {
+    padding: 0;
+}
+
+.form-submit {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.form-submit .button {
+    flex-grow: 0;
+}
+
+.text-success {
+    color: var(--color-success-primary)
+}
+
+.card {
+    border-radius: 8px;
+    border: 1px solid var(--color-black-divider);
+    margin: auto;
+    padding: 0.5rem 2rem;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    box-shadow: 0 2px 6px -6px;
+}
+
+.form-field.date-picker {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    gap: 0 8px;
+}
+
+.form-field.date-picker .label {
+    width: 100%;
+}
+
+.form-field.date-picker select {
+    flex-grow: 1;
+}

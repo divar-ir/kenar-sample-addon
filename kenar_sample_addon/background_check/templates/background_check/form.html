@@ -1,0 +1,65 @@
+{% load static %}
+
+<h1>تایید مالکیت</h1>
+<details>
+    <summary>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="caret">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.41 16.59L10.83 12L15.41 7.41L14 6L8 12L14 18L15.41 16.59Z" fill="black" fill-opacity="0.32">
+            </path>
+        </svg>
+        <span>تأیید مالکیت چیست؟</span>
+    </summary>
+    <p>
+        با وارد کردن کدپستی ملک آگهی، مالکیت ملک شما در <a href="https://amlak.mrud.ir/" target="_blank"
+            rel="nofollow noopener">سامانهٔ ملی املاک و
+            اسکان کشور</a> بررسی می&zwnj;شود و در صورت
+        تأیید، نشان «با تأیید مالکیت» در آگهی شما نمایش داده می&zwnj;شود.
+    </p>
+    <p>
+        توجه: ملک مورد نظر باید قبلاً در <a href="https://amlak.mrud.ir/" target="_blank" rel="nofollow noopener"
+            title="سامانهٔ املاک و اسکان کشور">این سامانه</a> ثبت شده باشد.
+    </p>
+</details>
+<form method="post" class="vertical-form" hx-post="/background-check/verify/" hx-target="#main"
+    hx-swap="innerHtml" hx-disabled-elt="this" hx-indicator="#indicator">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-field {% if field.errors %}error{% endif %}">
+        <div class="label">
+            {{ field.label_tag }}
+            {% if field.help_text %}
+            <strong>{{ field.help_text|safe }}</strong>
+            {% endif %}
+        </div>
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    {% if error is not None %}
+    <ul class="form-error">
+        <li>{{ error }}</li>
+    </ul>
+    {% endif %}
+    <div class="form-submit">
+        <button type="submit" class="button primary">
+            <span>ثبت</span>
+            <svg id="indicator" style="display: none" width="20" height="20" viewBox="0 0 66 66"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle fill="none" stroke-width="8" stroke-linecap="round" cx="33" cy="33" r="28" stroke="#e0e0e0">
+                </circle>
+                <g>
+                    <animateTransform attributeName="transform" type="rotate" values="0 33 33;270 33 33" begin="0s"
+                        dur="1.4s" fill="freeze" repeatCount="indefinite"></animateTransform>
+                    <circle fill="none" stroke-width="8" stroke-linecap="round" cx="33" cy="33" r="28"
+                        stroke-dasharray="187" stroke-dashoffset="610" stroke="#757575">
+                        <animateTransform attributeName="transform" type="rotate" values="0 33 33;135 33 33;450 33 33"
+                            begin="0s" dur="1.4s" fill="freeze" repeatCount="indefinite"></animateTransform>
+                        <animate attributeName="stroke-dashoffset" values="187;46.75;187" begin="0s" dur="1.4s"
+                            fill="freeze" repeatCount="indefinite"></animate>
+                    </circle>
+                </g>
+            </svg>
+        </button>
+    </div>
+</form>
