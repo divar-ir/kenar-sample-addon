@@ -38,6 +38,9 @@ class PersianSelectDateWidget(SelectDateWidget):
 
     date_re = re.compile(r"(\d{4})/(\d\d?)/(\d\d?)$")
 
+    template_name = "widgets/persianselectdatewidget.html"
+
+
     def __init__(self, attrs=None, years=None, months=None, empty_label=None, input_format="%Y/%m/%d"):
         if months is None:
             months = persian_months

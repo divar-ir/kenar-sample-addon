@@ -24,7 +24,7 @@ def landing(request):
                           'base-container.html',
                           {
                               'contents': 'background_check/result.html',
-                              'check': BackgroundCheck.objects.get(user=request.user)
+                              'status': BackgroundCheck.objects.get(user=request.user)
                           })
 
     return render(
@@ -60,6 +60,14 @@ def form(request):
             request,
             'error.html'
         )
+
+    if BackgroundCheck.objects.filter(user=request.user).exists():
+        return render(request,
+                      'base-container.html',
+                      {
+                          'contents': 'background_check/result.html',
+                          'status': BackgroundCheck.objects.get(user=request.user)
+                      })
 
     return render(request, 'base-container.html', {
         'form': BackgroundCheckForm(),

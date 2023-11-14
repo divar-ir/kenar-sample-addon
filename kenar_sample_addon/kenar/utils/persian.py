@@ -60,3 +60,13 @@ AR_FA_CHAR_MAPPING = {
     'ى': 'ی',
     'ي': 'ی'
 }
+
+
+def translate_fa_ar_numbers_to_en(s: str):
+    res = []
+    for ch in s:
+        res_ch = ch
+        res_ch = FA_EN_NUMBER_MAPPING.get(res_ch, res_ch)
+        res_ch = AR_EN_NUMBER_MAPPING.get(res_ch, res_ch)
+        res.append(res_ch)
+    return ''.join(res)

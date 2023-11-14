@@ -19,8 +19,7 @@ class VerificationForm(forms.Form):
         if national_id is None or len(national_id.strip()) == 0:
             raise ValidationError("کد ملی اجباری می‌باشد")
 
-        en_national_id = national_id.translate(persian.AR_EN_NUMBER_MAPPING).translate(persian.FA_EN_NUMBER_MAPPING). \
-            strip()
+        en_national_id = persian.translate_fa_ar_numbers_to_en(national_id).strip()
         if len(en_national_id) != 10:
             raise ValidationError("کد ملی یک عدد ۱۰ رقمی می‌باشد")
 
@@ -34,8 +33,7 @@ class VerificationForm(forms.Form):
         if postal_code is None or len(postal_code.strip()) == 0:
             raise ValidationError("کد پستی اجباری می‌باشد")
 
-        en_postal_code = postal_code.translate(persian.AR_EN_NUMBER_MAPPING).translate(persian.FA_EN_NUMBER_MAPPING). \
-            strip()
+        en_postal_code = persian.translate_fa_ar_numbers_to_en(postal_code).strip()
         if len(en_postal_code) != 10:
             raise ValidationError("کد پستی یک عدد ۱۰ رقمی می‌باشد")
 

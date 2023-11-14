@@ -38,6 +38,9 @@ class OAuthClient(DivarHTTPProxy):
         return req.url
 
     def get_token(self, code, app_slug, oauth_api_key):
+        headers = {
+            'api_key': oauth_api_key
+        }
         data = {
             'code': code,
             'client_id': app_slug,
@@ -48,7 +51,9 @@ class OAuthClient(DivarHTTPProxy):
             resp = self._post(
                 self._OAUTH_GET_TOKEN_ENDPOINT,
                 json=data,
+                headers=headers,
             )
+            resp.raise_for_status()
         except JSONDecodeError as e:
             logger.exception('Unable to parse response as json', e)
             raise OAuthException("decode error")

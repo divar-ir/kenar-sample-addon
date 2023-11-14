@@ -262,6 +262,11 @@ a:hover {
     color: var(--color-success-primary)
 }
 
+.text-error {
+    color: var(--color-error)
+}
+
+
 .card {
     border-radius: 8px;
     border: 1px solid var(--color-black-divider);

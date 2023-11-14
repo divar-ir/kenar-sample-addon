@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.forms',
+
     'kenar_sample_addon.real_estate_verification',
     'kenar_sample_addon.oauth',
     'kenar_sample_addon.background_check'
@@ -87,6 +89,8 @@ TEMPLATES = [
         },
     },
 ]
+
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
 STATICFILES_DIRS = [
     BASE_DIR / "kenar_sample_addon" / "static",
